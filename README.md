@@ -12,6 +12,11 @@ ive always loved economy based games, and this honestly started because i fell i
         - full blown economy simulator (money wise, loans, etc)
         - could do something like democracy 4 when it comes to the deficit, and taxes and whatnot
         - Rise of Nations on roblox is also an inspiration (love the idea of cities and states, with resources and tax income tied to cities)
+
+        - user interface (HUD)
+            - place for the date along with speed time thing
+            - something like vic3's hud to display stats on population, gdp, money etc
+            - maybe the HUD changes design to signify different periods
         
         - game mechanics/other related things
             - time period 
@@ -34,6 +39,11 @@ ive always loved economy based games, and this honestly started because i fell i
                 
                 tech
                     - probably something similiar to vic3's where every week you gain "research"
+                    - maybe something that can be unlocked?
+                
+                - power generation?
+                    - need to build power plants to power industries
+
 
 
                 - QoL

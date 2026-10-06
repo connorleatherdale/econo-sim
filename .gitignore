@@ -1,2 +1,5 @@
 /out
 /node_modules
+/out/econo-sim-win32-x64
+/out/make
+/out/make-results

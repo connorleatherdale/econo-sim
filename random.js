@@ -9,10 +9,28 @@ function tick() {
   var time = Date.now();
   frame++;
   if (time - startTime > 100) {
-      fps.innerHTML = (frame / ((time - startTime) / 1000)).toFixed(1);
+      fps.innerHTML = "FPS: " + (frame / ((time - startTime) / 1000)).toFixed(1);
       startTime = time;
       frame = 0;
 	}
   window.requestAnimationFrame(tick);
 }
 tick();
+
+//ram usage
+let RAMp = document.getElementById("ram");
+
+function ram() {
+    if (window.performance && window.performance.memory) { // checks to see if the browser supports it
+        const memoryInfo = window.performance.memory;
+        /*
+        // console logs to show how much memory and whatnot
+        console.log(`Used Heap: ${memoryInfo.usedJSHeapSize} bytes`);
+        console.log(`Total Heap: ${memoryInfo.totalJSHeapSize} bytes`);
+        console.log(`Heap Limit: ${memoryInfo.jsHeapSizeLimit} bytes`);
+        */
+
+        RAMp.innerHTML = "RAM usage: " + Math.floor((memoryInfo.totalJSHeapSize / 1024) / 1024) + "mb";
+    }
+}
+setInterval(ram, 1000);

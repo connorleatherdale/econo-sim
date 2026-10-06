@@ -9,7 +9,7 @@
 let Day = 1;
 let Month = 0;
 let MonthName = "January";
-let Year = 0; //this can be changed to whatever year
+let Year = 1950; //this can be changed to whatever year
 let paused = 0; // 0 (false) = paused, and 1 (true) is unpaused
 
 let timeConstant = 500; //for the tick function to be called X ammount of time (some constant * multiplier) in this case, this is the constant
@@ -59,7 +59,10 @@ function stopTick() {
 
 
 
-
+//stuff for things in the DOM
+const pauseHUD = document.getElementById("pausedHud");
+const time = document.getElementById("timeMultiplier");
+const tps = document.getElementById("TPS");
 
 //then add a listener to see if the user presses a button
 document.addEventListener("keydown", function(event) {
@@ -69,12 +72,14 @@ document.addEventListener("keydown", function(event) {
         if (paused == 0) {
             paused = 1;
             startTick();
-            console.log("time paused")
+            console.log("time unpaused")
+            pauseHUD.style.visibility = "hidden";
         } else if (paused == 1) {
             
             paused = 0;
             stopTick();
-            console.log("time was unpaused")
+            console.log("time was paused")
+            pauseHUD.style.visibility = "visible";
         }
         console.log("the space button was pressed");
     }
@@ -83,7 +88,6 @@ document.addEventListener("keydown", function(event) {
 
 
     //see if they hit 1,2, or 3 for the speed settings
-    const time = document.getElementById("timeMultiplier");
     if (event.key === "1") {
         timeMultiplier = 1;
         time.innerHTML = "1x";
@@ -106,7 +110,7 @@ document.addEventListener("keydown", function(event) {
     }
         
     
-
+    tps.innerHTML = "Ticks Per Second: " + 1000/tickTime;
     console.log(event.key);
     console.log(tickTime);
     
@@ -122,7 +126,6 @@ function tick() {
     
     
 }
-
 
 
 
