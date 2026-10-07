@@ -58,7 +58,6 @@ function stopTick() {
 
 
 
-
 //stuff for things in the DOM
 const pauseHUD = document.getElementById("pausedHud");
 const time = document.getElementById("timeMultiplier");

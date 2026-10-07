@@ -60,9 +60,13 @@ ive always loved economy based games, and this honestly started because i fell i
                         - store the different types of things in an array of objects
 
 
+- map stuff 
+    - might use leaflet to create a custom interactable map (probably what ill do instead of trying to figure out something goofy)
+        - could use it pretty damn well actually
 
 
 # creating a .exe file in this
+i have set this repo up so i can just run the one command to make a .exe file :D
 
 1. having a main.js (this file has, its a basic one and should work for every single one)
 2. run "npm run make"
