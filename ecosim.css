@@ -58,6 +58,9 @@
 .debug {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    margin-left: 10px;
+    visibility: hidden;
 }
 
 .debug p,h1,h2 {

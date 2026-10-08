@@ -34,3 +34,21 @@ function ram() {
     }
 }
 setInterval(ram, 1000);
+
+
+//showing / hiding the debug screen (maybe ` )
+let debugHidden = 1; //debug hidden by default
+const debug = document.getElementById("debug");
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "`") {
+        if (debugHidden == 0) { //if its hidden, show it
+            debugHidden = 1;
+            debug.style.visibility = "hidden";
+        } else if (debugHidden == 1) {
+            debugHidden = 0;
+            debug.style.visibility = "visible";
+        }
+    }
+
+})
