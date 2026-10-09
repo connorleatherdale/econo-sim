@@ -66,3 +66,19 @@
 .debug p,h1,h2 {
     padding: 5px;
 }
+
+
+.side {
+    display: flex;
+    flex-direction: column;
+    width: 5%;
+    justify-content: center;
+    align-items: center;
+}
+
+.side div {
+    background-color: aqua;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
