@@ -72,9 +72,22 @@ below are some goals i would like to achieve with this project
                         - store the different types of things in an array of objects
 
 
+        - keybinds
+            - time-related keybinds
+                - space - pause time
+                - 1,2,3 - time multiplier
+            - ` - debug menu
+            - esc
+                - might make a pause menu
+                - put the settings in there
+                - automatically pause the game whenever the pause menu pops up
+
 - map stuff 
     - might use leaflet to create a custom interactable map (probably what ill do instead of trying to figure out something goofy)
         - could use it pretty damn well actually
+
+    - could use panzoom to create a custom map that i can zoom into and pan
+        - might be able to get clickable states working :D
 
 # the language debate
 below are several languages i have thought about using, and the pros and cons

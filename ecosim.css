@@ -19,6 +19,7 @@
 
 .time p {
     font-size: larger;
+    margin-top: 1px;
 }
 
 
@@ -61,6 +62,7 @@
     margin-top: 10px;
     margin-left: 10px;
     visibility: hidden;
+    z-index: 5000000;
 }
 
 .debug p,h1,h2 {
@@ -74,6 +76,7 @@
     width: 5%;
     justify-content: center;
     align-items: center;
+    margin-left: 10px;
 }
 
 .side div {
@@ -81,4 +84,36 @@
     margin-left: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+
+.pop-up_Menu {
+    position: fixed;
+    z-index: 5;
+    background-color: grey;
+    justify-content: center;
+    align-items: center;
+    left: 10%;
+    top: 15%;
+    bottom: 10%;
+    right: 10%;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+.info {
+    margin-top: -20px;
+    height: 100%;
+}
+
+.info h1,h2 {
+    text-align: center;
+}
+
+.info p {
+    text-align: justify;
+    margin-left: 10px;
+    margin-right: 10px;
+    overflow-wrap: break-word;
+    overflow: hidden;
 }

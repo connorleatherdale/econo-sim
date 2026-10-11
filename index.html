@@ -40,6 +40,23 @@
 
         </div>
         <div class="hud" id="hud">
+            <div class="pop-up_Menu" id="pop-up_Menu">
+                <div class="info" id="info">
+                    <h2>Information</h2>
+                    <p>
+                        This is just an information pop-up, mostly intended as a test
+                    </p>
+                    <h2>About this game!</h2>
+                    <p>
+                        This was made as I've always wanted to create an economic simulation game after playing lots of both Cities:Skylines games, and lately alot of Vic 3.
+                    </p>
+                    <h2>Credits</h2>
+                    <p>
+                        Connor Leatherdale - Creator
+                    </p>
+
+                </div>
+            </div>
             <div class="topRow">
                 <div class="valueHud" id="valueHud">
                     <div>
@@ -66,16 +83,17 @@
 
             <div class="side" id="side">
                 <div>
-                    <button id="buidling">Buidling Menu</button>
+                    <button id="building">Buidling Menu</button>
                 </div>
                 <div>
-                    <p>hi</p>
+                    <button id="settings">settings</button>
+                </div>
+                <div>
+                    <button id="infoButton">Info</button>
                 </div>
             </div>
 
-            <div class="pop-up_Menu" id="pop-up_Menu">
-                
-            </div>
+            
 
             <div class="pause" id="pausedHud">
                 <h1>PAUSED</h1>
@@ -88,5 +106,6 @@
         <script type="module" src="Game_engine.js"></script>
         <script type="module" src="dates.js"></script>
         <script src="random.js"></script>
+        <script src="HUD/menu.js"></script>
     </body>
 </html>
