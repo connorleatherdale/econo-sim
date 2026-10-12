@@ -1,5 +1,17 @@
 
 
+.map {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -59;
+}
+
+.map img {
+    width: 100%;
+    height: 100%;
+}
+
 .topRow{
     display: flex;
     width: 100%;
@@ -102,8 +114,9 @@
 }
 
 .info {
-    margin-top: -20px;
+    position: absolute;
     height: 100%;
+    width: 100%;
 }
 
 .info h1,h2 {
@@ -116,4 +129,30 @@
     margin-right: 10px;
     overflow-wrap: break-word;
     overflow: hidden;
+}
+
+.settingsMenu {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.settingsMenu h1,h2 {
+    text-align: center;
+}
+
+.settingsMenu p {
+    text-align: justify;
+    margin-left: 10px;
+    margin-right: 10px;
+    overflow-wrap: break-word;
+    overflow: hidden;
+}
+
+
+
+.buildingMenu {
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }

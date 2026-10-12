@@ -33,7 +33,7 @@ function ram() {
         RAMp.innerHTML = "RAM usage: " + Math.floor((memoryInfo.totalJSHeapSize / 1024) / 1024) + "mb";
     }
 }
-setInterval(ram, 1000);
+setInterval(ram, 500);
 
 
 //showing / hiding the debug screen (maybe ` )
@@ -52,3 +52,6 @@ document.addEventListener("keydown", function(event) {
     }
 
 })
+
+
+

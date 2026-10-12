@@ -19,6 +19,7 @@
     "electron": "^44.5.1"
   },
   "dependencies": {
-    "leaflet": "^1.9.4"
+    "leaflet": "^1.9.4",
+    "stats.js": "^0.17.0"
   }
 }
