@@ -1,3 +1,5 @@
+[Plans](./features/README.md)
+
 # econo-sim
 
 background
