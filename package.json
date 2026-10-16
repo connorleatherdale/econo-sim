@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "leaflet": "^1.9.4",
-    "stats.js": "^0.17.0"
+    "stats.js": "^0.17.0",
+    "zoomist": "^2.2.0"
   }
 }

@@ -11,10 +11,14 @@ function menuButton(Menu) {
     }
 }
 
+
+
+
 // for the info menu pop-up
 const infoButton = document.getElementById("infoButton");
 const infoMenu = document.getElementById("info");
 const popUp = document.getElementById("pop-up_Menu");
+const wiki = document.getElementById("Wiki");
 
 popUp.style.visibility = "hidden";
 infoMenu.style.visibility = "hidden";
@@ -50,3 +54,6 @@ buildingButton.addEventListener("click", function() {
     settingsMenu.style.visibility = "hidden";
     infoMenu.style.visibility = "hidden";
 })
+
+
+

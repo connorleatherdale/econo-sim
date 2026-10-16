@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Econo-Sim</title>
@@ -39,10 +40,19 @@
             <p id="TPS">Ticks Per Second: </p>
 
         </div>
-
-        <div class="map" id="map">
-            <img src="image/world_map_4651_r4_jul26.jpg">
+        <!-- zoomist-container -->
+        <div class="zoomist-container">
+        <!-- zoomist-wrapper is required -->
+        <div class="zoomist-wrapper">
+            <!-- zoomist-image is required -->
+            <div class="zoomist-image">
+            <!-- you can add anything you want to zoom here. -->
+            <img src="image/world_map_4651_r4_jul26.jpg" />
+            </div>
         </div>
+        </div>
+
+
 
         <div class="hud" id="hud">
             <div class="pop-up_Menu" id="pop-up_Menu">
@@ -102,6 +112,9 @@
                 <div>
                     <button id="infoButton">Info</button>
                 </div>
+                <div>
+                    <button id="Wiki">Wiki</button>
+                </div>
             </div>
 
             
@@ -109,14 +122,17 @@
             <div class="pause" id="pausedHud">
                 <h1>PAUSED</h1>
             </div>
+
+
             
     
             
         </div>
         
-        <script type="module" src="Game_engine.js"></script>
-        <script type="module" src="dates.js"></script>
-        <script src="random.js"></script>
+        <script type="module" src="game_logic/Game_engine.js"></script>
+        <script type="module" src="game_logic/dates.js"></script>
+        <script src="game_logic/random.js"></script>
         <script src="HUD/menu.js"></script>
+        <script type="module" src="game_logic/map_Logic.js"></script>
     </body>
 </html>

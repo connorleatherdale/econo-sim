@@ -29,6 +29,9 @@ below are some goals i would like to achieve with this project
             - place for the date along with speed time thing
             - something like vic3's hud to display stats on population, gdp, money etc
             - maybe the HUD changes design to signify different periods
+            - map related parts
+                - when the user clicks a part of the map (like a city or territory) it should open up a menu
+                - probably something similiar to vicky's menu
         
         - game mechanics/other related things
             - time period 

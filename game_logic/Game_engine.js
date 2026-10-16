@@ -63,6 +63,7 @@ const pauseHUD = document.getElementById("pausedHud");
 const time = document.getElementById("timeMultiplier");
 const tps = document.getElementById("TPS");
 
+
 //then add a listener to see if the user presses a button
 document.addEventListener("keydown", function(event) {
     //see if the user hits the space button (which is just " " which i find funny) and then essentially just do a toggle
@@ -82,6 +83,7 @@ document.addEventListener("keydown", function(event) {
         }
         console.log("the space button was pressed");
     }
+
 
 
 
@@ -110,8 +112,8 @@ document.addEventListener("keydown", function(event) {
         
     
     tps.innerHTML = "Ticks Per Second: " + 1000/tickTime;
-    console.log(event.key);
-    console.log(tickTime);
+
+
     
 })
 
