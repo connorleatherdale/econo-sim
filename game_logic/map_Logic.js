@@ -4,6 +4,7 @@
 //zoomist related stuff
 import Zoomist from "../node_modules/zoomist/zoomist.js";
 
+/*
 new Zoomist('.zoomist-container', {
     // Optional parameters
     maxScale: 10,
@@ -12,3 +13,5 @@ new Zoomist('.zoomist-container', {
     draggable: true,
     wheelable: true,
   })
+
+  */

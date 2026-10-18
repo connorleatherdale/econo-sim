@@ -1,3 +1,7 @@
+/*
+  Map stuff
+*/
+
 .zoomist-container {
     position: fixed;
     top: 0px;
@@ -23,10 +27,27 @@
     
   }
 
-.hud {
-    pointer-events: none;
+
+
+.map {
+    position: fixed;
+    top: 15%;
+    left: 10%;
     border-style: solid;
+    width: 100%;
+    height: 100%;
 }
+
+
+
+
+
+
+/*
+  other stuff
+*/
+
+
 
 
 
@@ -109,10 +130,11 @@
     display: flex;
     flex-direction: column;
     width: 5%;
+    height: 100%;
     justify-content: center;
     align-items: center;
     margin-left: 10px;
-    pointer-events: none;
+    
 }
 
 .side div {
@@ -120,7 +142,7 @@
     margin-left: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
-    pointer-events: none;
+    
 }
 
 
@@ -136,16 +158,14 @@
     right: 10%;
     overflow: scroll;
     scrollbar-width: none;
-    pointer-events: none;
+    
 }
 
 .info {
     position: absolute;
     height: 100%;
     width: 100%;
-    pointer-events: none;
-    pointer-events: none;
-
+    
 }
 
 .info h1,h2 {
@@ -164,7 +184,7 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    pointer-events: none;
+    
 }
 
 .settingsMenu h1,h2 {
@@ -177,7 +197,7 @@
     margin-right: 10px;
     overflow-wrap: break-word;
     overflow: hidden;
-    pointer-events: none;
+    
 }
 
 
@@ -186,5 +206,5 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    pointer-events: none;
+    
 }

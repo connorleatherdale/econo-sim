@@ -19,18 +19,8 @@
                 
             }
         </style>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5128944007806948"
-        crossorigin="anonymous"></script>
-        <meta name="google-site-verification" content="cLTp5w7exi6-0c8lPxdHKItg9kIl41x1IN8jdB-NDLA" />
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-MJEKCC4EGF"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-MJEKCC4EGF');
-        </script>
+        
+        
         
     </head>
     <body>
@@ -40,21 +30,22 @@
             <p id="TPS">Ticks Per Second: </p>
 
         </div>
-        <!-- zoomist-container -->
+        <!--
+        
         <div class="zoomist-container">
-        <!-- zoomist-wrapper is required -->
+        
         <div class="zoomist-wrapper">
-            <!-- zoomist-image is required -->
+            
             <div class="zoomist-image">
-            <!-- you can add anything you want to zoom here. -->
+            
             <img src="image/world_map_4651_r4_jul26.jpg" />
             </div>
         </div>
         </div>
+        -->
 
 
-
-        <div class="hud" id="hud">
+        
             <div class="pop-up_Menu" id="pop-up_Menu">
                 <div class="info" id="info">
                     <h2>Information</h2>
@@ -125,14 +116,15 @@
 
 
             
-    
+        <canvas id="map" class="map"></canvas>
             
-        </div>
+        
         
         <script type="module" src="game_logic/Game_engine.js"></script>
         <script type="module" src="game_logic/dates.js"></script>
         <script src="game_logic/random.js"></script>
         <script src="HUD/menu.js"></script>
         <script type="module" src="game_logic/map_Logic.js"></script>
+        <script type="module" src="game_logic/map_Renderer.js"></script>
     </body>
 </html>
