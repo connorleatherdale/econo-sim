@@ -2,7 +2,7 @@
 
 # econo-sim
 
-Econo-sim is a basic 2d map game loosely based off Victoria 3 and other similiar games. It is written in mostly Javascript and can be played on both Browsers and as a standalone .exe file
+Econo-sim is a basic 2d map game loosely based off Victoria 3 and other similiar games. It is written in mostly Javascript and can be played on both Browsers and as a standalone .exe file. Mainly started as a passion project, and something i can work on in my free time.
 
 # Goals
 below are some goals i would like to achieve with this project

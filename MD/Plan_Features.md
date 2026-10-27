@@ -6,6 +6,23 @@
  - could do something like democracy 4 when it comes to the deficit, and taxes and whatnot
  - Rise of Nations on roblox is also an inspiration (love the idea of cities and states, with resources and tax income tied to cities)
 
+actual window (how the node.js application looks)
+- see about customizing the application
+- .iso icon, all that
+- make it more bare-bones (hate how electron has the top menu part thing)
+
+- audio
+    - might have to use howler.js 
+        - can play several sounds at once
+    - features
+        - button clicks
+        - sounds when you open menus
+        - (if i add pop-ups) sounds when a notification pops up
+        - when research is done/unlocked
+        - background music?????? (maybe if someone wants to share)
+        - when the user pauses/unpauses
+
+
  - user interface (HUD)
      - place for the date along with speed time thing
      - something like vic3's hud to display stats on population, gdp, money etc
