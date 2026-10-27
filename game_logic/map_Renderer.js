@@ -1,19 +1,9 @@
 //file to render the map
 
-const dpr = window.devicePixelRatio; //device pixel ratio
 const canvas = document.getElementById("map");
 const ctx = canvas.getContext("2d");
 let cameraOffset = { x: 0, y: 0};
 let cameraZoom = 1;
-
-//handing the size of the canvas based on the device
-canvas.width = canvas.clientWidth * dpr;
-canvas.height = canvas.clientHeight * dpr;
-
-ctx.scale(dpr,dpr);
-
-canvas.style.width = `${canvas.clientWidth}px`;
-canvas.style.height = `${canvas.clientHeight}px`;
 
 // zooming on a wheel
 canvas.addEventListener("wheel", (e) => {
@@ -46,17 +36,46 @@ canvas.addEventListener("mousemove", (e) => {
 
 canvas.addEventListener('mouseup', () => isDragging = false);
 
+// see if the window has changed sizes, to update the size of the canvas
+function calculateCanvasSize() { // function does as what it says, simple as
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const dpr = window.devicePixelRatio || 1;
+
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    render();
+};
+
+new ResizeObserver(calculateCanvasSize).observe(canvas);
+window.addEventListener("resize", calculateCanvasSize);
+calculateCanvasSize();
+
+
+import * as cities from "../game_logic/mapData/cities.js";
 
 function render() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    ctx.clearRect(0, 0, width, height);
     ctx.save();
-    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.translate(width / 2, height / 2);
     ctx.scale(cameraZoom, cameraZoom);
-    ctx.translate(-canvas.width / 2 + cameraOffset.x, -canvas.height / 2 + cameraOffset.y);
+    ctx.translate(-width / 2 + cameraOffset.x, -height / 2 + cameraOffset.y);
     
 
     //draw whatever we wanna see
-    ctx.fillRect(canvas.width,canvas.height,50,50);
+    // gonna end up with a loop at some point, probably running through a .json file of city names along with filling out the country borders, unless i can manage a background for it (i do have a .json file of countries that i *might* be able to use)
+    for(let i = 0; i < cities.cities.length; i++) {
+        let city = cities.cities[i];
+        console.log(city.name);
+        console.log(i);
+        ctx.beginPath();
+        ctx.arc(city.posX,city.posY, 20, 0, 2 * Math.PI);
+        ctx.stroke()
+    }
+    ctx.fillRect(width,height,50,50);
 
     ctx.restore();
 }

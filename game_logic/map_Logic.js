@@ -2,7 +2,7 @@
 
 
 //zoomist related stuff
-import Zoomist from "../node_modules/zoomist/zoomist.js";
+//import Zoomist from "../node_modules/zoomist/zoomist.js";
 
 /*
 new Zoomist('.zoomist-container', {
