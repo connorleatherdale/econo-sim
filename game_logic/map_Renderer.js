@@ -52,8 +52,23 @@ new ResizeObserver(calculateCanvasSize).observe(canvas);
 window.addEventListener("resize", calculateCanvasSize);
 calculateCanvasSize();
 
+//rendering stuff
+import * as cities from "../game_logic/mapData/cities.js"; // imports the cities
+//import the countries
+import countries from "./mapData/countries-coastline-25m.json" with { type: "json" };
 
-import * as cities from "../game_logic/mapData/cities.js";
+console.log(countries.features[1].geometry.coordinates);
+/*
+async function loadJSON() {
+    const response = await fetch("./mapData/countries-coastline-25m.json");
+    const c = await response.json();
+
+    return c;
+}
+
+const Countries = loadJSON()
+
+*/
 
 function render() {
     const width = canvas.clientWidth;
@@ -75,7 +90,13 @@ function render() {
         ctx.arc(city.posX,city.posY, 20, 0, 2 * Math.PI);
         ctx.stroke()
     }
-    ctx.fillRect(width,height,50,50);
+
+    //drawing the countries of the world (hopefully)
+    
 
     ctx.restore();
 }
+
+
+//helper render functions
+
