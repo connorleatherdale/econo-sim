@@ -1,9 +1,19 @@
 //file to render the map
 
 const canvas = document.getElementById("map");
+const out = document.getElementById("render"); // part of the map render calculation
 const ctx = canvas.getContext("2d");
 let cameraOffset = { x: 0, y: 0};
 let cameraZoom = 1;
+
+//rendering stuff
+import * as cities from "../game_logic/mapData/cities.js"; // imports the cities
+//import the countries
+import countries from "./mapData/countries-coastline-25m.json" with { type: "json" };
+const countriesLength = countries.features.length;
+console.log(countries.features[1].geometry.coordinates);
+let countri = countries.features;
+console.log(countri)
 
 // zooming on a wheel
 canvas.addEventListener("wheel", (e) => {
@@ -52,12 +62,7 @@ new ResizeObserver(calculateCanvasSize).observe(canvas);
 window.addEventListener("resize", calculateCanvasSize);
 calculateCanvasSize();
 
-//rendering stuff
-import * as cities from "../game_logic/mapData/cities.js"; // imports the cities
-//import the countries
-import countries from "./mapData/countries-coastline-25m.json" with { type: "json" };
 
-console.log(countries.features[1].geometry.coordinates);
 /*
 async function loadJSON() {
     const response = await fetch("./mapData/countries-coastline-25m.json");
@@ -70,7 +75,10 @@ const Countries = loadJSON()
 
 */
 
+
+
 function render() {
+    let time = Date.now();
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
     ctx.clearRect(0, 0, width, height);
@@ -92,11 +100,20 @@ function render() {
     }
 
     //drawing the countries of the world (hopefully)
-    
+    //side note, a reverse for loop might be the best case since this big ol JSON array WILL have to be called every frame (not ideal, might see about storing it in memory?)
+    for(let k=0; k < countriesLength;k++) {
+        let country = countries.features[k];
+        //might have to loop for the different arrays? cause it looks like theres different arrays and such inside each one idek
+    }
 
     ctx.restore();
+
+    out.innerHTML = "Render (MS): " + (Date.now() - time) + "MS";
 }
 
 
 //helper render functions
 
+function projectLatMercToCanvas(lat, canvasHeight, CanvasWidth) {
+
+}
