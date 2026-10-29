@@ -4,16 +4,13 @@ const canvas = document.getElementById("map");
 const out = document.getElementById("render"); // part of the map render calculation
 const ctx = canvas.getContext("2d");
 let cameraOffset = { x: 0, y: 0};
-let cameraZoom = 1;
+let cameraZoom = 5;
 
 //rendering stuff
 import * as cities from "../game_logic/mapData/cities.js"; // imports the cities
 //import the countries
-import countries from "./mapData/countries-coastline-25m.json" with { type: "json" };
-const countriesLength = countries.features.length;
-console.log(countries.features[1].geometry.coordinates);
-let countri = countries.features;
-console.log(countri)
+import countries from "./mapData/countries-coastline-5km.geo.json" with { type: "json" };
+
 
 // zooming on a wheel
 canvas.addEventListener("wheel", (e) => {
@@ -21,7 +18,7 @@ canvas.addEventListener("wheel", (e) => {
     const zoomIntensity = 0.1;
     const direction = e.deltaY > 0 ? -1 : 1;
     cameraZoom += direction * zoomIntensity * cameraZoom
-    cameraZoom = Math.max(0.1, Math.min(5, cameraZoom));
+    cameraZoom = Math.max(5, Math.min(20, cameraZoom));
     render();
 });
 
@@ -60,8 +57,78 @@ function calculateCanvasSize() { // function does as what it says, simple as
 
 new ResizeObserver(calculateCanvasSize).observe(canvas);
 window.addEventListener("resize", calculateCanvasSize);
-calculateCanvasSize();
 
+const countryFeatures = countries.features || (countries.type === "Feature" ? [countries] : []);
+const countryBounds = { minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity };
+
+function mercatorY(latitude) {
+    const radians = Math.max(-85.0511, Math.min(85.0511, latitude)) * Math.PI / 180;
+    return Math.log(Math.tan(Math.PI / 4 + radians / 2));
+}
+
+function findCountryBounds(value) {
+    if (!Array.isArray(value)) return;
+    if (typeof value[0] === "number" && typeof value[1] === "number") {
+        const x = value[0] * Math.PI / 180;
+        const y = mercatorY(value[1]);
+        countryBounds.minX = Math.min(countryBounds.minX, x);
+        countryBounds.maxX = Math.max(countryBounds.maxX, x);
+        countryBounds.minY = Math.min(countryBounds.minY, y);
+        countryBounds.maxY = Math.max(countryBounds.maxY, y);
+        return;
+    }
+    value.forEach(findCountryBounds);
+}
+
+for (const feature of countryFeatures) {
+    const geometry = feature.geometry;
+    if (geometry?.type === "GeometryCollection") {
+        geometry.geometries.forEach(item => findCountryBounds(item.coordinates));
+    } else {
+        findCountryBounds(geometry?.coordinates);
+    }
+}
+
+function projectCountryPoint(coordinate, width, height) {
+    const mapWidth = countryBounds.maxX - countryBounds.minX;
+    const mapHeight = countryBounds.maxY - countryBounds.minY;
+    const scale = Math.min((width - 20) / mapWidth, (height - 20) / mapHeight);
+    return {
+        x: (width - mapWidth * scale) / 2 + (coordinate[0] * Math.PI / 180 - countryBounds.minX) * scale,
+        y: (height - mapHeight * scale) / 2 + (countryBounds.maxY - mercatorY(coordinate[1])) * scale
+    };
+}
+
+function drawCountryGeometry(geometry, width, height) {
+    if (!geometry) return;
+    if (geometry.type === "GeometryCollection") {
+        geometry.geometries.forEach(item => drawCountryGeometry(item, width, height));
+        return;
+    }
+
+    const polygons = geometry.type === "Polygon"
+        ? [geometry.coordinates]
+        : geometry.type === "MultiPolygon" ? geometry.coordinates : [];
+
+    for (const polygon of polygons) {
+        ctx.beginPath();
+        for (const ring of polygon) {
+            ring.forEach((coordinate, index) => {
+                const point = projectCountryPoint(coordinate, width, height);
+                if (index === 0) ctx.moveTo(point.x, point.y);
+                else ctx.lineTo(point.x, point.y);
+            });
+            ctx.closePath();
+        }
+        ctx.fillStyle = "#d8dfc8";
+        ctx.strokeStyle = "#58644d";
+        ctx.lineWidth = 0.7;
+        ctx.fill("evenodd");
+        ctx.stroke();
+    }
+}
+
+calculateCanvasSize();
 
 /*
 async function loadJSON() {
@@ -88,22 +155,20 @@ function render() {
     ctx.translate(-width / 2 + cameraOffset.x, -height / 2 + cameraOffset.y);
     
 
+
+
     //draw whatever we wanna see
-    // gonna end up with a loop at some point, probably running through a .json file of city names along with filling out the country borders, unless i can manage a background for it (i do have a .json file of countries that i *might* be able to use)
-    for(let i = 0; i < cities.cities.length; i++) {
-        let city = cities.cities[i];
-        console.log(city.name);
-        console.log(i);
+    if (Number.isFinite(countryBounds.minX) && countryBounds.maxX > countryBounds.minX && countryBounds.maxY > countryBounds.minY) {
+        for (const feature of countryFeatures) {
+            drawCountryGeometry(feature.geometry, width, height);
+        }
+    }
+
+    for(let a = 0; a < cities.cities.length; a++) {
+        let city = cities.cities[a];
         ctx.beginPath();
         ctx.arc(city.posX,city.posY, 20, 0, 2 * Math.PI);
         ctx.stroke()
-    }
-
-    //drawing the countries of the world (hopefully)
-    //side note, a reverse for loop might be the best case since this big ol JSON array WILL have to be called every frame (not ideal, might see about storing it in memory?)
-    for(let k=0; k < countriesLength;k++) {
-        let country = countries.features[k];
-        //might have to loop for the different arrays? cause it looks like theres different arrays and such inside each one idek
     }
 
     ctx.restore();
