@@ -17,6 +17,12 @@ export const cities = [
         "population": 2500,
         "posX": -150,
         "posY": -250,
-    }
+    }, 
+    {
+        "name": "idek" ,
+        "population": 2500,
+        "posX": 0,
+        "posY": 0,
+    }, 
 
 ]

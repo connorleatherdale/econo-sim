@@ -11,7 +11,8 @@ function createWindow () {
     icon: path.join(__dirname, "/assets/app_Icon.png"),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: true
+      nodeIntegration: true,
+      devTools: false,
     }
   })
 

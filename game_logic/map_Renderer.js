@@ -18,7 +18,7 @@ canvas.addEventListener("wheel", (e) => {
     const zoomIntensity = 0.1;
     const direction = e.deltaY > 0 ? -1 : 1;
     cameraZoom += direction * zoomIntensity * cameraZoom
-    cameraZoom = Math.max(5, Math.min(20, cameraZoom));
+    cameraZoom = Math.max(1, Math.min(20, cameraZoom));
     render();
 });
 
@@ -46,7 +46,44 @@ canvas.addEventListener("mousemove", (e) => {
 canvas.addEventListener('mouseup', () => isDragging = false);
 
 // WASD controls for the map
-canvas.addEventListener("keydown")
+document.addEventListener("keypress", function(event) {
+    if (event.key === "w") {
+        if (cameraZoom > 5) {
+            cameraOffset.y += 1;
+        } else {
+            cameraOffset.y += 5;
+        }
+        
+        
+    }
+    if (event.key === "s") {
+        if (cameraZoom > 5) {
+            cameraOffset.y -= 1;
+        } else {
+            cameraOffset.y -= 5;
+        }
+        
+    }
+    if (event.key === "d") {
+        if (cameraZoom > 5) {
+            cameraOffset.x -= 1;
+        } else {
+            cameraOffset.x -= 5;
+        }
+        
+    }
+    if (event.key === "a") {
+        if (cameraZoom > 5) {
+            cameraOffset.x += 1;
+        } else {
+            cameraOffset.x += 5;
+        }
+        
+    }
+
+    console.log(event.key)
+    render()
+;})
 
 // see if the window has changed sizes, to update the size of the canvas
 function calculateCanvasSize() { // function does as what it says, simple as
@@ -128,6 +165,9 @@ function drawCountryGeometry(geometry, width, height) {
         ctx.fillStyle = "#d8dfc8";
         ctx.strokeStyle = "#58644d";
         ctx.lineWidth = 0.7;
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+        ctx.miterLimit = 2;
         ctx.fill("evenodd");
         ctx.stroke();
     }
@@ -173,6 +213,7 @@ function render() {
         let city = cities.cities[a];
         ctx.beginPath();
         ctx.arc(city.posX,city.posY, 20, 0, 2 * Math.PI);
+        ctx.fillText(city.name, city.posX, city.posY);
         ctx.stroke()
     }
 
@@ -182,8 +223,3 @@ function render() {
 }
 
 
-//helper render functions
-
-function projectLatMercToCanvas(lat, canvasHeight, CanvasWidth) {
-
-}
