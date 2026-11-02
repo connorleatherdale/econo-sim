@@ -34,6 +34,8 @@ canvas.addEventListener("mousedown", (e)=>{
 });
 
 
+
+
 canvas.addEventListener("mousemove", (e) => {
     if (!isDragging) return; 
     cameraOffset.x = e.clientX / cameraZoom - dragStart.x;
@@ -42,6 +44,9 @@ canvas.addEventListener("mousemove", (e) => {
 });
 
 canvas.addEventListener('mouseup', () => isDragging = false);
+
+// WASD controls for the map
+canvas.addEventListener("keydown")
 
 // see if the window has changed sizes, to update the size of the canvas
 function calculateCanvasSize() { // function does as what it says, simple as
