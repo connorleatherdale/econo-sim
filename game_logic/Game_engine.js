@@ -17,6 +17,12 @@ let timeMultiplier = 1; //multiplier mentioned in previous comment (base is 1, w
 let tickTime = timeConstant * timeMultiplier;
 let timerID;
 import * as month from "./dates.js"; // import the data related to the dates that i made
+const DOMTPT = document.getElementById("TimePerTick");
+
+//population related stuff
+const DOMpop = document.getElementById("Pop");
+let population = 25000000;
+let PGP = 0.1; //Population Growth Percent (10%)
 
 
 
@@ -117,15 +123,26 @@ document.addEventListener("keydown", function(event) {
     
 })
 
+// population calculations
+function updatePop() {
+
+    DOMpop.innerHTML = "Population: " + population;
+}
+
+//calculating the economic part of the game
+
+
 
 
 
 
 //tick related nonesense
 function tick() {
+    let time = Date.now();
     calculateDate(); //check the date (should advance by 1 day each tick)
-    
-    
+    updatePop();
+
+    DOMTPT.innerHTML = "Time Per Tick " + (Date.now() - time) + "MS";
 }
 
 
