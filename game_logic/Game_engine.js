@@ -11,6 +11,8 @@ let Month = 0;
 let MonthName = "January";
 let Year = 1950; //this can be changed to whatever year
 let paused = 0; // 0 (false) = paused, and 1 (true) is unpaused
+let monthMemory = "January";
+let monthPassed = false;
 
 let timeConstant = 500; //for the tick function to be called X ammount of time (some constant * multiplier) in this case, this is the constant
 let timeMultiplier = 1; //multiplier mentioned in previous comment (base is 1, which will be divided by multiples of 5 (.5,.25, etc) to create a 5x,10x and 15x time speed mutliplier)
@@ -52,6 +54,19 @@ function calculateDate() {
     
     MonthName = month.data[Month].name; // set the month name to whatever lines up in our dates.js array
     document.getElementById("date").innerHTML = MonthName + ", " + Day + ", " + Year;
+    hasMonthPassed();
+}
+
+//check to see if a month has passes
+function hasMonthPassed() {
+    if  (MonthName == monthMemory) {
+        monthPassed = false;
+        console.log("not a new month");
+    } else if (MonthName != monthMemory) {
+        monthPassed = true;
+        monthMemory = MonthName;
+        console.log("ITS A NEW MONTH YAAY");
+    }
 }
 
 // working on starting and pausing ticks

@@ -30,6 +30,12 @@ actual window (how the node.js application looks)
      - map related parts
          - when the user clicks a part of the map (like a city or territory) it should open up a menu
          - probably something similiar to vicky's menu
+
+    *** going to do spreadsheet kind of thing first before doing the world/map view ***
+    - literally as close to a spreadsheet simulator at first
+        - will eventually have a toggle between the two
+    - spreedsheet gui
+        - sorted by different menus (building, resources, the internal market, etc)
         
  - game mechanics/other related things
      - time period 
