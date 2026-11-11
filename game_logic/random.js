@@ -18,7 +18,9 @@ function tick() {
 tick();
 
 //ram usage
+const RAMcanvas = document.getElementById("RAMcanvas");
 let RAMp = document.getElementById("ram");
+let RAMGraph = [];
 
 function ram() {
     if (window.performance && window.performance.memory) { // checks to see if the browser supports it
@@ -31,7 +33,15 @@ function ram() {
         */
 
         RAMp.innerHTML = "RAM usage: " + Math.floor((memoryInfo.totalJSHeapSize / 1024) / 1024) + "mb";
+
+        // sorting out pushing/popping out of the RAMgraph array, which we will use later to graph
+        RAMGraph.unshift(Math.floor((memoryInfo.totalJSHeapSize / 1024) / 1024));
+        if (RAMGraph.length > 10) {
+            RAMGraph.pop();
+        }
     }
+    console.log(RAMGraph);
+    GraphArray(RAMGraph, RAMcanvas, "RAM (MB)");
 }
 setInterval(ram, 500);
 
@@ -54,4 +64,72 @@ document.addEventListener("keydown", function(event) {
 })
 
 
+// might create graphs for everything just because
 
+function GraphArray(array, canvas, title) {
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (array.length === 0) {
+        return;
+    }
+
+    const maxVal = Math.max(...array);
+    const range = maxVal || 1;
+    const padding = Math.min(5, canvas.height / 2);
+    const plotLeft = 48;
+    const plotWidth = Math.max(0, canvas.width - plotLeft - padding);
+    const plotHeight = canvas.height - padding * 2;
+    const tickCount = 5;
+
+    ctx.font = "10px sans-serif";
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "#333";
+    ctx.strokeStyle = "#ccc";
+    ctx.lineWidth = 1;
+
+    for (let tick = 0; tick < tickCount; tick++) {
+        const fraction = tick / (tickCount - 1);
+        const y = padding + fraction * plotHeight;
+        const value = maxVal * (1 - fraction);
+        const label = Number.isInteger(value) ? String(value) : value.toFixed(1);
+
+        ctx.beginPath();
+        ctx.moveTo(plotLeft, y);
+        ctx.lineTo(canvas.width - padding, y);
+        ctx.stroke();
+        ctx.fillText(label, plotLeft - 5, y);
+    }
+
+    ctx.beginPath();
+    array.forEach((value, index) => {
+        // Calculate X position (evenly spaced)
+        const x = array.length > 1
+            ? plotLeft + (plotWidth / (array.length - 1)) * index
+            : plotLeft + plotWidth / 2;
+        
+        // Calculate Y position (inverted because canvas Y starts at top)
+        // Normalize value to 0-1 range, then scale to canvas height
+        const normalizedY = Math.max(0, Math.min(1, value / range));
+        const y = padding + ((1 - normalizedY) * plotHeight);
+    
+        if (index === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      });
+    
+      ctx.strokeStyle = "#333";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.save();
+      ctx.translate(10, canvas.height / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#333";
+      ctx.fillText(title, 0, 0);
+      ctx.restore();
+}

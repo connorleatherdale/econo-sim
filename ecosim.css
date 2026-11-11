@@ -122,7 +122,9 @@
 }
 .debug {
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(234, 233, 233, 0.75);
+    border-color: black;
+    border-style: solid;
     margin-top: 10px;
     margin-left: 10px;
     visibility: hidden;
@@ -132,6 +134,13 @@
 
 .debug p,h1,h2 {
     padding: 5px;
+}
+
+.RAMcanvas {
+    width: 300px;
+    height: 150px;
+    border-style: solid;
+    border-color: black;
 }
 
 
