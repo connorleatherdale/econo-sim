@@ -62,10 +62,12 @@ function hasMonthPassed() {
     if  (MonthName == monthMemory) {
         monthPassed = false;
         console.log("not a new month");
+        return false;
     } else if (MonthName != monthMemory) {
         monthPassed = true;
         monthMemory = MonthName;
         console.log("ITS A NEW MONTH YAAY");
+        return true;
     }
 }
 

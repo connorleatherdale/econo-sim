@@ -4,6 +4,8 @@
 var fps = document.getElementById("fps");
 var startTime = Date.now();
 var frame = 0;
+let FPSgraph = [];
+const FPScanvas = document.getElementById("fpsCanvas");
 
 function tick() {
   var time = Date.now();
@@ -12,10 +14,12 @@ function tick() {
       fps.innerHTML = "FPS: " + (frame / ((time - startTime) / 1000)).toFixed(1);
       startTime = time;
       frame = 0;
-	}
+	} 
   window.requestAnimationFrame(tick);
 }
 tick();
+
+
 
 //ram usage
 const RAMcanvas = document.getElementById("RAMcanvas");
@@ -36,11 +40,11 @@ function ram() {
 
         // sorting out pushing/popping out of the RAMgraph array, which we will use later to graph
         RAMGraph.unshift(Math.floor((memoryInfo.totalJSHeapSize / 1024) / 1024));
-        if (RAMGraph.length > 10) {
+        if (RAMGraph.length > 20) {
             RAMGraph.pop();
         }
     }
-    console.log(RAMGraph);
+    
     GraphArray(RAMGraph, RAMcanvas, "RAM (MB)");
 }
 setInterval(ram, 500);
@@ -64,9 +68,24 @@ document.addEventListener("keydown", function(event) {
 })
 
 
+
+let randomArray = [];
+let xValue = 1;
+const randomCanvas = document.getElementById("random");
+
+//random graph test
+function randomGraph() {
+    xValue++;
+    randomArray.unshift(Math.pow(xValue, 2));
+    GraphArray(randomArray, randomCanvas, "random array graph");
+}
+
+setInterval(randomGraph, 50);
+
+
 // might create graphs for everything just because
 
-function GraphArray(array, canvas, title) {
+export function GraphArray(array, canvas, title) {
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 

@@ -12,7 +12,7 @@ function createWindow () {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
-      devTools: false,
+      devTools: true, // if the user and use the shift inspect element (kept on for debugging and whatnot)
     }
   })
 
