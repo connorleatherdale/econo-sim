@@ -29,6 +29,8 @@ infoButton.addEventListener('click', function() {
     buildingMenu.style.visibility = "hidden";
 });
 
+
+// ** SETTINGS PAGE**
 // working on the settings page
 const settingsButton = document.getElementById("settings");
 const settingsMenu = document.getElementById("settingsMenu");

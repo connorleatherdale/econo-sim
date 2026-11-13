@@ -80,7 +80,7 @@ function randomGraph() {
     GraphArray(randomArray, randomCanvas, "random array graph");
 }
 
-setInterval(randomGraph, 50);
+//setInterval(randomGraph, 50);
 
 
 // might create graphs for everything just because

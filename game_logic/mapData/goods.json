@@ -3,5 +3,10 @@
         "name": "wood",
         "description": "A beavers Favourite snack! made in logging camps and used in many different places! As Basic of a good as you can get!",
         "basePrice": 10
+    }, 
+    {
+        "name": "IRON",
+        "description": "Without it, we wouldn't have something to hold our beans! Found in Iron Mines and used in many things.",
+        "basePrice": 10
     }
 ]

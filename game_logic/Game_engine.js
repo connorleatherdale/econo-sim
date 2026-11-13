@@ -54,19 +54,19 @@ function calculateDate() {
     
     MonthName = month.data[Month].name; // set the month name to whatever lines up in our dates.js array
     document.getElementById("date").innerHTML = MonthName + ", " + Day + ", " + Year;
-    hasMonthPassed();
+    
 }
 
 //check to see if a month has passes
 function hasMonthPassed() {
     if  (MonthName == monthMemory) {
         monthPassed = false;
-        console.log("not a new month");
+        
         return false;
     } else if (MonthName != monthMemory) {
         monthPassed = true;
         monthMemory = MonthName;
-        console.log("ITS A NEW MONTH YAAY");
+        
         return true;
     }
 }
@@ -158,9 +158,28 @@ function tick() {
     let time = Date.now();
     calculateDate(); //check the date (should advance by 1 day each tick)
     updatePop();
+    let monthPassed = hasMonthPassed();
+    if (monthPassed == true) { // put stuff in here that has to be checked every month
+        console.log("Month has Passed");
+        // autosave stuff
+    }
+
 
     DOMTPT.innerHTML = "Time Per Tick " + (Date.now() - time) + "MS";
 }
 
+
+
+
+
+
+
+
+
+// code for saving the game
+
+function saveData() {
+    return 0;
+}
 
 
