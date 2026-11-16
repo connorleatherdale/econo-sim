@@ -161,7 +161,7 @@ function tick() {
     let monthPassed = hasMonthPassed();
     if (monthPassed == true) { // put stuff in here that has to be checked every month
         console.log("Month has Passed");
-        // autosave stuff
+        saveData().catch((error) => console.error("Could not save the game:", error));
     }
 
 
@@ -178,8 +178,94 @@ function tick() {
 
 // code for saving the game
 
-function saveData() {
-    return 0;
+// Open the database and create its object store on first use.
+const saveDatabaseName = "saveFile";
+const saveStoreName = "values";
+const currentSaveId = "current";
+
+function openSaveDatabase() {
+    return new Promise((resolve, reject) => {
+        const request = window.indexedDB.open(saveDatabaseName, 1);
+
+        request.onupgradeneeded = () => {
+            const database = request.result;
+            if (!database.objectStoreNames.contains(saveStoreName)) {
+                database.createObjectStore(saveStoreName, { autoIncrement: true });
+            }
+        };
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+        request.onblocked = () => reject(new Error("Opening the save database was blocked"));
+    });
 }
+
+function transactionToPromise(transaction) {
+    return new Promise((resolve, reject) => {
+        transaction.oncomplete = () => resolve();
+        transaction.onerror = () => reject(transaction.error);
+        transaction.onabort = () => reject(transaction.error || new Error("Save transaction was aborted"));
+    });
+}
+
+function requestToPromise(request) {
+    return new Promise((resolve, reject) => {
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+async function saveData() {
+    const database = await openSaveDatabase();
+    try {
+        const transaction = database.transaction(saveStoreName, "readwrite");
+        const transactionComplete = transactionToPromise(transaction);
+
+        transaction.objectStore(saveStoreName).put({
+            data: {
+                Day,
+                Month,
+                MonthName,
+                Year,
+                monthMemory,
+                population,
+                PGP,
+                timeMultiplier
+            }
+        }, currentSaveId);
+
+        await transactionComplete;
+    } finally {
+        database.close();
+    }
+}
+
+async function loadData() {
+    const database = await openSaveDatabase();
+    let savedGame;
+    try {
+        const transaction = database.transaction(saveStoreName, "readonly");
+        const transactionComplete = transactionToPromise(transaction);
+        const savedGameRequest = requestToPromise(
+            transaction.objectStore(saveStoreName).get(currentSaveId)
+        );
+        [savedGame] = await Promise.all([savedGameRequest, transactionComplete]);
+    } finally {
+        database.close();
+    }
+
+    if (!savedGame) {
+        return false;
+    }
+
+    ({ Day, Month, MonthName, Year, monthMemory, population, PGP, timeMultiplier } = savedGame.data);
+    tickTime = timeConstant * timeMultiplier;
+    document.getElementById("date").innerHTML = MonthName + ", " + Day + ", " + Year;
+    updatePop();
+    time.innerHTML = (timeMultiplier === 1 ? 1 : timeMultiplier === 0.5 ? 2 : 3) + "x";
+    tps.innerHTML = "Ticks Per Second: " + 1000 / tickTime;
+    return true;
+}
+
+loadData().catch((error) => console.error("Could not load the saved game:", error));
 
 
